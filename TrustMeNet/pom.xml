@@ -22,6 +22,7 @@
     </dependencies>
 
     <modules>
+        <module>TrustMeNet-client</module>
         <module>TrustMeNet-server</module>
     </modules>
 
