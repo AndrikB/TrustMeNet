@@ -3,6 +3,7 @@ package com.trustmenet.repositories.dao.implementation;
 import com.trustmenet.repositories.dao.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@PropertySource("classpath:database.properties")
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Value("#{${sql.generic}}")
