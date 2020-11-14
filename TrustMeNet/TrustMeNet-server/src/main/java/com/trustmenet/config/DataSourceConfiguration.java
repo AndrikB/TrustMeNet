@@ -20,10 +20,8 @@ public class DataSourceConfiguration {
     @Autowired
     private Environment environment;
 
-    @Primary
     @Bean
     public DataSource postgresDataSource() {
-
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
         hikariConfig.setJdbcUrl(environment.getProperty("spring.datasource.url"));
@@ -41,9 +39,8 @@ public class DataSourceConfiguration {
         return new HikariDataSource(hikariConfig);
     }
 
-    @Primary
     @Bean
-    public JdbcTemplate postgresJdbcTemplate(@Qualifier("postgresDataSource") DataSource ds) {
+    public JdbcTemplate postgresJdbcTemplate(DataSource ds) {
         return new JdbcTemplate(ds);
     }
 
