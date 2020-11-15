@@ -1,0 +1,40 @@
+<div class="container custom">
+
+  <h3 class="text-center">Registration</h3>
+
+  <div class="form-group row">
+    <div class="col">
+      <input type="text" placeholder="Login"
+             class="form-control" [(ngModel)]="user.login">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col">
+      <input type="email" placeholder="E mail" class="form-control" [(ngModel)]="user.mail">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col">
+      <input type="password" placeholder="password"
+             class="form-control" [(ngModel)]="user.password">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col">
+      <input type="password" placeholder="Confirm password"
+             class="form-control" [(ngModel)]="confirmPassword" aria-describedby="cpHelp">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <button
+      (click)="registerUser()"
+      class="btn col">
+      Register
+    </button>
+  </div>
+
+</div>

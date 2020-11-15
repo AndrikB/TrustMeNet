@@ -1,14 +1,14 @@
 package com.trustmenet.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.trustmenet.models.User;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TestController {
 
-    @GetMapping("/test/{id}")
-    public String getTest(@PathVariable int id) {
-        return "test" + id;
+    @PostMapping("/api/v1/registration")
+    public User getTest(@RequestBody User user) {
+        System.out.println(user);
+        return user;
     }
 }
