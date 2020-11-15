@@ -1,6 +1,6 @@
 package com.trustmenet.repositories.dao.mappers;
 
-import com.trustmenet.repositories.entities.User;
+import com.trustmenet.repositories.dto.UserDto;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
 import org.springframework.jdbc.core.RowMapper;
@@ -8,11 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserMapper implements RowMapper<User> {
+public class UserMapper implements RowMapper<UserDto> {
 
     @Override
-    public User mapRow(ResultSet resultSet, int i) throws SQLException {
-        return User.builder()
+    public UserDto mapRow(ResultSet resultSet, int i) throws SQLException {
+        return UserDto.builder()
                 .id(resultSet.getInt("id"))
                 .firstName(resultSet.getString("first_name"))
                 .secondName(resultSet.getString("second_name"))
