@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/api/v1/**", "/api/v1/registration/**",
+                .antMatchers("/api/v1/registration/**",
                         "/api/v1/login/**")
                 .permitAll()
                 .antMatchers("/favicon.ico",

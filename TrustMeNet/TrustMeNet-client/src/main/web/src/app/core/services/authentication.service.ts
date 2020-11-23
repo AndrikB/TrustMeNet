@@ -26,11 +26,6 @@ export class AuthenticationService {
       .pipe(catchError(this.handleError<User>(null)));
   }
 
-  get() {
-    return this.http.get<string>(`${api}get`)
-      .pipe(catchError(this.handleError<string>(null)));
-  }
-
   login(login: string, password: string) {
     return this.http.post<string>(`${api}login`, {login, password})
       .pipe(map(

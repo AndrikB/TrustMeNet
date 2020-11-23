@@ -22,7 +22,9 @@ public class RegistrationController {
     @PostMapping("/api/v1/login")
     public Object login(@RequestBody UserDto user) {
         return new Object() {
-            final String token = userService.login(user.getLogin(), user.getPassword());
+            public String getToken() {
+                return userService.login(user.getLogin(), user.getPassword());
+            }
         };
     }
 

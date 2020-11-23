@@ -47,7 +47,7 @@ public class UserService {
     public String login(String login, String password){
         UserDto user = userDao.getUserByLogin(login);
 
-        if (user == null || passwordEncoder.matches(password, user.getPassword())) {
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid username or password");
         }
 
