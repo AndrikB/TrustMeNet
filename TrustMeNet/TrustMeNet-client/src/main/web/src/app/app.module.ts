@@ -8,10 +8,12 @@ import {AppComponent} from './app.component';
 import {AuthenticationModule} from "./authentication/authentication.module";
 import {AuthenticationRoutingModule} from "./authentication/authentication-routing.module";
 import {CoreModule} from "./core/core.module";
+import {ProfileModule} from "./profile/profile.module";
+import {ProfileRoutingModule} from "./profile/profile-routing.module";
 import {BasicAuthHttpInterceptorService} from "./core/services/auth-http-interceptor.service";
 import {AuthGuardService} from "./core/services/auth-guard.service";
 import {RoleGuardService} from "./core/services/role-guard.service";
-import {JWT_OPTIONS} from "@auth0/angular-jwt";
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -24,9 +26,11 @@ import {JWT_OPTIONS} from "@auth0/angular-jwt";
     AuthenticationModule,
     AuthenticationRoutingModule,
     CoreModule,
+    ProfileModule,
+    ProfileRoutingModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},
-    AuthGuardService, RoleGuardService, {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},],
+    AuthGuardService, RoleGuardService, {provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

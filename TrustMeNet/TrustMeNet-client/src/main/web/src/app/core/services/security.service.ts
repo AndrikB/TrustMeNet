@@ -29,14 +29,14 @@ export class SecurityService {
       return false;
     }
     if (this.jwtHelper.isTokenExpired(token)) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('Authorization');
       return false;
     }
     return true;
   }
 
   public getCurrentId() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Authorization');
     if (token) {
       // @ts-ignore
       return decode(token).userId;
@@ -46,7 +46,7 @@ export class SecurityService {
   }
 
   public getCurrentRole() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Authorization');
     if (token) {
       // @ts-ignore
       return decode(token).role;

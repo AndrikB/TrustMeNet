@@ -1,5 +1,7 @@
 package com.trustmenet.repositories.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
 import lombok.Builder;
@@ -11,6 +13,7 @@ import java.util.Date;
 @Builder
 public class UserDto {
 
+
     private int id;
 
     private String firstName;
@@ -19,8 +22,10 @@ public class UserDto {
 
     private String login;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String mail;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private String profile;

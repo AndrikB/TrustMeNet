@@ -1,6 +1,11 @@
 export class User {
   id: number;
+  firstName: string;
+  secondName: string;
   login: string;
-  password: string;
   mail: string;
+  password: string;
+  profile: string;
+  registrationDate: Date;
+  rating: number;
 }

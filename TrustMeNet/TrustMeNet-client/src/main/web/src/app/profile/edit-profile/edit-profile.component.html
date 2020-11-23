@@ -1,0 +1,137 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-item nav-link" [ngClass]="{'active':firstSelected}" id="nav-home-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-favorite" aria-selected="true" (click)="firstSelected = true">edit Personal Data
+    </button>
+    <button class="nav-item nav-link" [ngClass]="{'active':!firstSelected}" id="nav-profile-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-completed" aria-selected="false" (click)="firstSelected = false">change Password
+    </button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade" [ngClass]="{'show active':firstSelected}" id="nav-personal-data" role="tabpanel" aria-labelledby="nav-home-tab">
+
+    <div class="container" *ngIf="user">
+      <h3 class="col-sm-10 text-center offset-md-1 mt-4">edit Personal Data</h3>
+      <div class="form-horizontal align-content-center">
+        <div class="form-group required"><label
+          class="col-md-2 control-label offset-md-1">first Name</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="user.firstName"
+                   #firstname="ngModel"
+                   pattern="^[a-zA-Zа-яА-Яієї']{2,25}$" aria-describedby="fnHelp">
+            <small id="fnHelp" class="form-text text-danger"
+                   [hidden]="firstname.valid && user.firstName.length>1 || firstname.untouched">
+              no Valid First Name
+            </small>
+          </div>
+        </div>
+        <div class="form-group required"><label
+          class="col-md-2 control-label offset-md-1">last Name</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="user.secondName"
+                   #lastname="ngModel"
+                   pattern="^[a-zA-Zа-яА-Яієї']{2,25}$" aria-describedby="lnHelp">
+            <small id="lnHelp" class="form-text text-danger"
+                   [hidden]="lastname.valid && user.secondName.length>1  || lastname.untouched">
+              no Valid Last Name
+            </small>
+          </div>
+        </div>
+        <div class="form-group required"><label class="col-md-2 control-label offset-md-1">E-mail</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="email" placeholder="Email" class="form-control" [(ngModel)]="user.mail"
+                   #email="ngModel"
+                   pattern="^[A-z\d._]+@[A-z]+\.[A-z]+$" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-danger"
+                   [hidden]="email.valid && user.mail.length>1 || email.untouched">
+              no Valid Mail
+            </small>
+          </div>
+        </div>
+        <div class="form-group"><label class="col-md-2 control-label offset-md-1">description</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="text" placeholder="Description" class="form-control" [(ngModel)]="user.profile"
+                   #profile="ngModel"
+                   aria-describedby="profileHelp">
+            <small id="profileHelp" class="form-text text-danger" [hidden]="user.profile.length<=100">
+              no Valid Profile
+            </small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-check col-sm-5 offset-md-1">
+            <button
+              [disabled]="!firstname.valid || !lastname.valid ||  !email.valid || user.secondName.length<2 ||
+               user.firstName.length<2 || user.mail.length<2 || !profile.valid || user.profile.length>100"
+              (click)="edit()"
+              class="btn btn-warning btn-block col-sm-12">
+              save
+            </button>
+          </div>
+
+          <div class="form-check col-sm-5">
+            <button routerLink="../profile"
+                    class="btn btn-outline-secondary btn-block active col-sm-12">
+              cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="tab-pane fade" [ngClass]="{'show active':!firstSelected}" id="nav-password" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <div class="container">
+      <h3 class="col-sm-10 text-center offset-md-1 mt-4">change Password</h3>
+      <div class="form-horizontal align-content-center">
+        <div class="form-group required"><label
+          class="col-md-2 control-label offset-md-1">current Password</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="password" placeholder="Current password" class="form-control" autofocus #currentPassword>
+          </div>
+        </div>
+
+        <div class="form-group required"><label
+          class="col-md-2 control-label offset-md-1">new Password</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="password" placeholder="Password" class="form-control"
+                   [(ngModel)]="passwordNew"
+                   #newPassword="ngModel"
+                   pattern="^.{8,}$" aria-describedby="passHelp">
+            <small id="passHelp" class="form-text text-danger" [hidden]="newPassword.valid || newPassword.untouched">
+              no Valid Password
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group required"><label
+          class="col-md-2 control-label offset-md-1">confirm Password</label>
+          <div class="col-sm-10 offset-md-1">
+            <input type="password" placeholder="Confirm password" class="form-control" autofocus #confirmPassword>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="form-check col-sm-5 offset-md-1">
+            <button
+              [disabled]="!newPassword.valid"
+              (click)="checkPasswords()"
+              class="btn btn-warning btn-block col-sm-12">
+              save
+            </button>
+          </div>
+
+          <div class="form-check col-sm-5">
+            <button routerLink="../profile"
+                    class="btn btn-outline-secondary btn-block active col-sm-12">
+              cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
