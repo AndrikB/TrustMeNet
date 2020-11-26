@@ -14,6 +14,9 @@ import {BasicAuthHttpInterceptorService} from "./core/services/auth-http-interce
 import {AuthGuardService} from "./core/services/auth-guard.service";
 import {RoleGuardService} from "./core/services/role-guard.service";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
+import {AnnouncementModule} from "./announcement/announcement.module";
+import {AnnouncementRoutingModule} from "./announcement/announcement-routing.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
     HttpClientModule,
     AuthenticationModule,
     AuthenticationRoutingModule,
+    AnnouncementModule,
+    AnnouncementRoutingModule,
     CoreModule,
     ProfileModule,
     ProfileRoutingModule,
