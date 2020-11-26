@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // @ts-ignore
 import $ from "jquery";
+import {SecurityService} from "../services/security.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,7 @@ import $ from "jquery";
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public securityService: SecurityService) { }
 
   ngOnInit(): void {
   }

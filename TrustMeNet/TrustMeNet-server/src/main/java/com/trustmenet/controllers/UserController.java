@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
@@ -35,5 +36,10 @@ public class UserController {
     public boolean checkPasswords(@RequestParam(value = "login") String login,
                                   @RequestParam(value = "password") String password) {
         return userService.checkPasswords(login, password);
+    }
+
+    @GetMapping("/users")
+    public List<UserDto> getUsers(@RequestParam(value = "usersCount") int usersCount) {
+        return userService.getNextPageOfUsers(usersCount);
     }
 }

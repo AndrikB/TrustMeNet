@@ -7,11 +7,11 @@
     </div>
 
     <ul class="list-unstyled components">
-      <li>
-        <a routerLink="/edit">My Profile</a>
+      <li *ngIf="securityService.isAuthenticated()">
+        <a routerLink="/profile">Profile</a>
       </li>
       <li>
-        <a href="#">My Friends</a>
+        <a routerLink="/users">Users</a>
       </li>
     </ul>
 
@@ -31,18 +31,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">link 1</a>
+            <li class="nav-item" *ngIf="securityService.isAuthenticated()">
+              <a class="nav-link" (click)="securityService.logout()" routerLink="../login">Logout</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="../profile">profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="../login">login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="../registration">registration</a>
-            </li>
+            <ng-container *ngIf="!securityService.isAuthenticated()">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="../login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="../registration">Registration</a>
+              </li>
+            </ng-container>
           </ul>
         </div>
       </div>

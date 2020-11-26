@@ -51,4 +51,11 @@ export class UserService {
   changePassword(login: string, newPassword: string): Observable<string> {
     return this.http.put<string>(`${api}users/password/${login}`, newPassword);
   }
+
+  getUsers(currentCount: number) {
+    return this.http.get<User[]>(`${api}users?usersCount=${currentCount}`)
+      .pipe(
+        catchError(this.handleError<User[]>([]))
+      );
+  }
 }

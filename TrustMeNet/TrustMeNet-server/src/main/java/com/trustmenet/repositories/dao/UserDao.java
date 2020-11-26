@@ -27,6 +27,8 @@ public interface UserDao extends GenericDao<UserDto> {
 
     List<UserDto> searchUsersByLogin(String login, Role role);
 
+    List<UserDto> getUsersPage(int limit, int offset);
+
     boolean checkUsersFriendship(int firstUserId, int secondUserId);
 
     void updateUserPhoto(int idImage, int userId);

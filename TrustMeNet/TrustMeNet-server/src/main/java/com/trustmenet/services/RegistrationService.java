@@ -57,7 +57,7 @@ public class RegistrationService {
 
         user.setRating(0);
         user.setProfile("");
-
+        user.setImageId(defaultId);
 
         int id = userDao.save(user);
         user.setId(id);

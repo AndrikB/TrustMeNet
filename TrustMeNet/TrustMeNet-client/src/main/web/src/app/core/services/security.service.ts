@@ -21,7 +21,7 @@ export class SecurityService {
 
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Authorization');
     if (!token) {
       return false;
     }
@@ -53,5 +53,9 @@ export class SecurityService {
     } else {
       return null;
     }
+  }
+
+  public logout() {
+    localStorage.removeItem('Authorization')
   }
 }

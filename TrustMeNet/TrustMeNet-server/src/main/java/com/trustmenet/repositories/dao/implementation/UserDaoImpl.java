@@ -185,6 +185,14 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
     }
 
     @Override
+    public List<UserDto> getUsersPage(int limit, int offset) {
+        return jdbcTemplate.query(
+                usersQueries.get("getNextUserPage"),
+                new Object[]{limit, offset}, new UserMapper()
+        );
+    }
+
+    @Override
     public boolean checkUsersFriendship(int firstUserId, int secondUserId) {
         Integer counter = jdbcTemplate.queryForObject(friendsQueries.get("checkFriendship"),
                 new Object[]{firstUserId, secondUserId},

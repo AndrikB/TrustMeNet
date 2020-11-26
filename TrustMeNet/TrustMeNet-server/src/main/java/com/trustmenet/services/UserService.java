@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -39,5 +41,9 @@ public class UserService {
     public boolean checkPasswords(String login, String password) {
         UserDto currentUser = userDao.getUserByLogin(login);
         return passwordEncoder.matches(password, currentUser.getPassword());
+    }
+
+    public List<UserDto> getNextPageOfUsers(int usersCount) {
+        return userDao.getUsersPage(10, usersCount);
     }
 }

@@ -7,14 +7,14 @@
               [ngStyle]="{ 'background-image': 'url(data:image/jpeg;base64,' + user.image.src  + ')'}">
         </div>
 
-        <button *ngIf="isOwn" class="btn btn-primary btn-block" routerLink="/edit">
-          edit
+        <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
+          Edit
         </button>
-        <button *ngIf="!isOwn && !isFriend" class="btn btn-dark btn-block" (click)="friendship()">
-          add to friends
+        <button *ngIf="!isOwn && !isFriend" class="btn blue btn-block" (click)="friendship()">
+          Add to friends
         </button>
-        <button *ngIf="!isOwn && isFriend" class="btn btn-dark btn-block" (click)="friendship()">
-          delete from friends
+        <button *ngIf="!isOwn && isFriend" class="btn blue btn-block" (click)="friendship()">
+          Delete from friends
         </button>
 
       </div>
@@ -23,25 +23,25 @@
           <table class="table table-hover h5">
             <tbody>
             <tr class="table-borderless">
-              <td style="text-align: left">login</td>
+              <td style="text-align: left">Login</td>
               <td style="text-align: left">{{user.login}}</td>
 
             </tr>
 
             <tr>
-              <td style="text-align: left">first name</td>
+              <td style="text-align: left">First Name</td>
               <td style="text-align: left">{{user.firstName}}</td>
             </tr>
             <tr>
-              <td style="text-align: left">second name</td>
+              <td style="text-align: left">Second Name</td>
               <td style="text-align: left">{{user.secondName}}</td>
             </tr>
             <tr>
-              <td style="text-align: left">profile</td>
+              <td style="text-align: left">Profile</td>
               <td style="text-align: left">{{user.profile}}</td>
             </tr>
             <tr>
-              <td style="text-align: left">rating</td>
+              <td style="text-align: left">Rating</td>
               <td style="text-align: left"> {{user.rating}}
                 <img src="../../../assets/images/ratings-icon.jpg" width="30" height="30" align="bottom"/></td>
             </tr>

@@ -22,9 +22,8 @@ export class EditProfileComponent implements OnInit {
   firstSelected: boolean = true;
 
   ngOnInit(): void {
-    this.userService.getUser(7).subscribe(data => this.user = data, error => console.log(error))
-
     this.id = this.securityService.getCurrentId();
+    this.userService.getUser(this.id).subscribe(data => this.user = data, error => console.log(error))
   }
 
 

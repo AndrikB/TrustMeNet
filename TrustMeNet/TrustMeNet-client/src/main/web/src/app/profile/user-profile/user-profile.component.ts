@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
               private router: Router) {
   }
 
-  isOwn = true;
+  isOwn = false;
   isFriend = false;
 
   user: User;
@@ -26,6 +26,7 @@ export class UserProfileComponent implements OnInit {
     let id = Number(this.route.snapshot.paramMap.get('id'));
     if(!this.route.snapshot.paramMap.get('id')){
       id = this.securityService.getCurrentId();
+      this.isOwn = true;
     }
     this.userService.getUser(id).subscribe(data => this.user = data,
         error => this.router.navigate(['profile']))
