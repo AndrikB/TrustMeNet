@@ -1,5 +1,6 @@
 package com.trustmenet.repositories.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class Image {
+
     private int id;
     private String src;
+
 }

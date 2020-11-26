@@ -1,7 +1,7 @@
 package com.trustmenet.services;
 
 import com.trustmenet.repositories.dao.UserDao;
-import com.trustmenet.repositories.dto.UserDto;
+import com.trustmenet.repositories.entities.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

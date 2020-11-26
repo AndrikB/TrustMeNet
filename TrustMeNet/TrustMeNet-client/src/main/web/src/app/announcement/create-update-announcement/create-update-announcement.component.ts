@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Announcement} from "../../core/models/announcement";
-import {Image} from "../../core/models/image";
+import {Image} from "../../core/models/Image";
 import {AnnouncementService} from "../../core/services/announcement.service";
 import {SecurityService} from "../../core/services/security.service";
 

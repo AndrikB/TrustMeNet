@@ -38,4 +38,17 @@ export class UserService {
     };
   }
 
+  checkPasswords(login: string, oldPassword: string) {
+    return this.http.get<boolean>(`${api}users/password/check?login=${login}&password=${oldPassword}`)
+  }
+
+
+  updateUser(editedUser: User): Observable<User> {
+    return this.http.put<User>(`${api}users/`, editedUser);
+  }
+
+
+  changePassword(login: string, newPassword: string): Observable<string> {
+    return this.http.put<string>(`${api}users/password/${login}`, newPassword);
+  }
 }

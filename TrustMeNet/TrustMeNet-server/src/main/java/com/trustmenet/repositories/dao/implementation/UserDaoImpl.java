@@ -3,7 +3,7 @@ package com.trustmenet.repositories.dao.implementation;
 
 import com.trustmenet.repositories.dao.UserDao;
 import com.trustmenet.repositories.dao.mappers.UserMapper;
-import com.trustmenet.repositories.dto.UserDto;
+import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +78,7 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
         return new Object[]{userDto.getLogin(), userDto.getPassword(), userDto.getMail(),
                 userDto.getStatus().name().toLowerCase(), userDto.getRole().name().toLowerCase(),
                 userDto.getFirstName(), userDto.getSecondName(), userDto.getRegistrationDate(),
-                userDto.getProfile(), userDto.getRating(), // user.getImageId(),
+                userDto.getProfile(), userDto.getRating(), userDto.getImageId(),
                 userDto.getId()};
     }
 
@@ -201,6 +201,12 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
     @Override
     public void updateUserScore(int userId, int score) {
         jdbcTemplate.update(usersQueries.get("updateUserScore"), score, userId);
+    }
+
+    @Override
+    public void changePassword(String password, String login) {
+        jdbcTemplate.update(usersQueries.get("changePassword"),
+                password, login);
     }
 
     @Override

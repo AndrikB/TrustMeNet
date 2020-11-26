@@ -65,7 +65,7 @@
             <button
               [disabled]="!firstname.valid || !lastname.valid ||  !email.valid || user.secondName.length<2 ||
                user.firstName.length<2 || user.mail.length<2 || !profile.valid || user.profile.length>100"
-              (click)="edit()"
+              (click)="edit(id,firstname.value, lastname.value, email.value, profile.value)"
               class="btn btn-warning btn-block col-sm-12">
               save
             </button>
@@ -118,7 +118,7 @@
           <div class="form-check col-sm-5 offset-md-1">
             <button
               [disabled]="!newPassword.valid"
-              (click)="checkPasswords()"
+              (click)="checkPasswords(currentPassword.value,newPassword.value, confirmPassword.value)"
               class="btn btn-warning btn-block col-sm-12">
               save
             </button>

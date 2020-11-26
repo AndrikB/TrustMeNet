@@ -1,7 +1,7 @@
 package com.trustmenet.repositories.dao;
 
 
-import com.trustmenet.repositories.dto.UserDto;
+import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
 
@@ -34,4 +34,6 @@ public interface UserDao extends GenericDao<UserDto> {
     void updateUserStatus(int id, UserAccountStatus status);
 
     void updateUserScore(int userId, int score);
+
+    void changePassword(String password, String login);
 }

@@ -1,3 +1,5 @@
+import {Image} from "./Image";
+
 export class User {
   id: number;
   firstName: string;
@@ -8,4 +10,7 @@ export class User {
   profile: string;
   registrationDate: Date;
   rating: number;
+  imageId:  number;
+  image: Image;
+  status: string;
 }

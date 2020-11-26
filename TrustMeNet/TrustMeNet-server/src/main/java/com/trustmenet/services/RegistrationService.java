@@ -2,10 +2,12 @@ package com.trustmenet.services;
 
 import com.trustmenet.config.JWTUtils;
 import com.trustmenet.repositories.dao.UserDao;
-import com.trustmenet.repositories.dto.UserDto;
+import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,7 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@PropertySource("classpath:user.properties")
 public class RegistrationService {
+
+    @Value("#{${defaultImageId}}")
+    private int defaultId;
 
     @Autowired
     private UserDao userDao;
@@ -38,6 +44,7 @@ public class RegistrationService {
         user.setStatus(UserAccountStatus.UNACTIVATED);
         user.setRating(0);
         user.setProfile("");
+        user.setImageId(defaultId);
 
 
         int id = userDao.save(user);

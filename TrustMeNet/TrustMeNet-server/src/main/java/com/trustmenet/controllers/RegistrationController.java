@@ -1,6 +1,6 @@
 package com.trustmenet.controllers;
 
-import com.trustmenet.repositories.dto.UserDto;
+import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
