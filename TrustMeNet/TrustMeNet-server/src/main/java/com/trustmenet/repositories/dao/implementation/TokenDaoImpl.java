@@ -28,6 +28,7 @@ public class TokenDaoImpl implements TokenDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Override
     public Token get(int id) {
         String selectQuery = tokensQueries.get("getByUserId");
         Token token;
@@ -63,6 +64,7 @@ public class TokenDaoImpl implements TokenDao {
         return null;
     }
 
+    @Override
     public int save(Token token) {
         String saveQuery = tokensQueries.get("saveToken");
 
@@ -74,6 +76,13 @@ public class TokenDaoImpl implements TokenDao {
         }
         return 0;
 
+    }
+
+    @Override
+    public void deleteToken(Token token) {
+        String delete = tokensQueries.get("delete");
+        jdbcTemplate.update(delete,
+                token.getToken(), token.getTokenType().name().toLowerCase());
     }
 
     private static class TokenRowMapper implements RowMapper<Token> {

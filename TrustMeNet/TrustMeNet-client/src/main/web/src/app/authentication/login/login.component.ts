@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../core/services/authentication.service";
 import {Router} from "@angular/router";
+import {AlertService} from "../../core/services/alert.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router) { }
+              private router: Router,
+              private alert: AlertService) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error)
+          this.alert.error('invalid username or password')
         }
       );
   }

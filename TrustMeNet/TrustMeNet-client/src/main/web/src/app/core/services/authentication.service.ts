@@ -39,6 +39,23 @@ export class AuthenticationService {
       );
   }
 
+  confirmMail(token: string) {
+    return this.http.get<boolean>(`${api}registration/${token}`);
+
+  }
+
+  confirmResetPass(token: string) {
+    return this.http.get<boolean>(`${api}/pass-recovery/${token}`);
+  }
+
+  resetPass(email: string) {
+    return this.http.post<string>(`${api}pass-recovery`, email, this.httpOptions);
+  }
+
+  createNewPass(token: string, newPassword: string) {
+    return this.http.put<string>(`${api}/pass-recovery/${token}`, newPassword, this.httpOptions);
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
@@ -46,5 +63,4 @@ export class AuthenticationService {
       return of(result as T);
     };
   }
-
 }
