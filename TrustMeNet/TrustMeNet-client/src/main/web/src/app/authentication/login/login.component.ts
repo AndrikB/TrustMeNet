@@ -21,14 +21,20 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    this.login = this.login.trim();
+    if (!this.login) {
+      this.alert.error('login is empty');
+      return;
+    }
+
     this.authenticationService.login(this.login, this.password)
       .subscribe(
         data => {
-          this.router.navigate(['profile'])
+          this.router.navigate(['profile']).then();
         },
         error => {
-          console.log(error)
-          this.alert.error('invalid username or password')
+          console.log(error);
+          this.alert.error('invalid username or password');
         }
       );
   }

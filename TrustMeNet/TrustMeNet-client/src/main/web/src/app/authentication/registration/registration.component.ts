@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../core/services/authentication.service";
 import {User} from "../../core/models/User";
 import {Router} from "@angular/router";
+import {AlertService} from "../../core/services/alert.service";
 
 @Component({
   selector: 'app-registration',
@@ -14,6 +15,7 @@ export class RegistrationComponent implements OnInit {
   confirmPassword: string
 
   constructor(private authenticationService: AuthenticationService,
+              private alert: AlertService,
               private router: Router) {
   }
 
@@ -23,13 +25,20 @@ export class RegistrationComponent implements OnInit {
 
 
   registerUser() {
+    if (!this.user.login || !this.user.firstName || !this.user.secondName || !this.user.mail) {
+      this.alert.error('field is empty');
+      return;
+    }
+
     this.authenticationService.register(this.user)
       .subscribe(
         data => {
-          this.router.navigate(['login'])
+          this.alert.success('registration was successful', true);
+          this.router.navigate(['login']).then()
         },
         error => {
           console.log(error)
+          this.alert.error('registration was not successful', false);
         }
       );
   }

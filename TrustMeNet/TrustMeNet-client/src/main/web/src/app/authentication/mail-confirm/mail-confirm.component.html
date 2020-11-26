@@ -1,1 +1,16 @@
-<p>mail-confirm works!</p>
+<div class="container">
+  <div *ngIf="isConfirmed == true" style="margin-top: 25vh;">
+    <div class="col-sm text-center">
+      <h2>Your registration has been successfully confirmed.</h2>
+      <h4>Please, sign in to start</h4>
+      <a class="btn btn-dark mt-2" style="width: 20vw" [routerLink]="['/login']" routerLinkActive="active">
+        Sign in</a><br>
+
+    </div>
+  </div>
+  <ng-template *ngIf="isConfirmed == false">
+    <div class="col-sm text-center" style="margin-top: 30vh;">
+      <h2>Sorry, but your token is unavailable.</h2>
+    </div>
+  </ng-template>
+</div>

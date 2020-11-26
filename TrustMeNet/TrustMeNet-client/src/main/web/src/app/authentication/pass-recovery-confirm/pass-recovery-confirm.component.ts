@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../core/services/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AlertService} from "../../core/services/alert.service";
 
 @Component({
   selector: 'app-pass-recovery-confirm',
@@ -15,6 +16,7 @@ export class PassRecoveryConfirmComponent implements OnInit {
 
 
   constructor(private authenticationService: AuthenticationService,
+              private alert: AlertService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -39,7 +41,7 @@ export class PassRecoveryConfirmComponent implements OnInit {
           this.router.navigate(['/login']).then();
         },
         error => {
-          //error
+          this.alert.error('error applying pass');
         });
   }
 }
