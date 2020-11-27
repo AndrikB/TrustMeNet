@@ -54,7 +54,7 @@ export class AnnouncementService {
   }
 
   getAll(isPublished:boolean){
-    return this.http.get<Announcement[]>(`${api}/announcements?isPublished=${!isPublished}`).pipe(
+    return this.http.get<Announcement[]>(`${api}/announcements?isPublished=${isPublished}`).pipe(
       catchError(this.handleError<Announcement[]>())
     );
   }

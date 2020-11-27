@@ -1,10 +1,10 @@
 <div class="row">
-  <a class= "col-lg-10 col-md-10 mx-auto m-2 btn btn-outline-dark" routerLink="/createAnnouncement">CREATE BUTTON</a>
+  <a class= "col-lg-10 col-md-10 mx-auto m-2 btn btn-outline-dark" routerLink="/newannouncement">CREATE</a>
 </div>
-<div *ngIf="role != 'USER' && role" class="offset-10 my-2">
+<div *ngIf="role != 'USER' && role" class="offset-9 my-2">
   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-outline-secondary active">
-      <input (click)="getPublished()" type="radio" name="options" id="option1" autocomplete="off" checked> Published
+    <label class="btn btn-outline-secondary">
+      <input (click)="getPublished()" type="radio" name="options" id="option1" autocomplete="off"> Published
     </label>
     <label class="btn btn-outline-secondary">
       <input (click)="getUnpublished()" type="radio" name="options" id="option2" autocomplete="off"> Unpublished

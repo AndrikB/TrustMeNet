@@ -9,7 +9,7 @@
 
       <textarea [(ngModel)]="announcement.fullText" class="form-control m-2" rows="10" placeholder="TEXT"></textarea>
 
-      <label *ngIf="(announcement.imageId==-1)" class="image-upload-container btn btn-bwm btn-outline-primary">
+      <label *ngIf="(announcement.imageId==-1)" class="image-upload-container btn btn-bwm btn-outline-secondary">
         <span>UPLOAD</span>
         <input class="d-none" #imageInput
                type="file"
@@ -28,7 +28,7 @@
       <div *ngIf="isInvalid" class="w-100 alert border-danger my-4 text-center">
         ALERT
       </div>
-      <button (click)="send()" class="btn form-control btn-primary">SUBMIT</button>
+      <button (click)="send()" class="btn form-control btn-dark blue">SUBMIT</button>
     </div>
 
   </div>

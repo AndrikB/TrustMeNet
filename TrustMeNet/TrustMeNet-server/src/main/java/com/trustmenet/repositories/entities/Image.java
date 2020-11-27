@@ -12,5 +12,4 @@ public class Image {
 
     private int id;
     private String src;
-
 }
