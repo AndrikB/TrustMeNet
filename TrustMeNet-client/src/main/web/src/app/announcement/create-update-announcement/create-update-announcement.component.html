@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h1 *ngIf="announcement.id" class="mt-5">ANNOUNCEMENT UPDATE</h1>
+      <h1 *ngIf="!announcement.id" class="mt-5">ANNOUNCEMENT CREATE</h1>
+
+      <input [(ngModel)]="announcement.title" type="text" class="form-control m-2" placeholder="TITLE">
+      <input [(ngModel)]="announcement.subtitle" type="text" class="form-control m-2" placeholder="SUBTITLE">
+
+      <textarea [(ngModel)]="announcement.fullText" class="form-control m-2" rows="10" placeholder="TEXT"></textarea>
+
+      <label *ngIf="(announcement.imageId==-1)" class="image-upload-container btn btn-bwm btn-outline-secondary">
+        <span>UPLOAD</span>
+        <input class="d-none" #imageInput
+               type="file"
+               accept="image/*"
+               (change)="processFile(imageInput, announcement.image)">
+      </label>
+
+      <label *ngIf="announcement.imageId!=-1" class="image-upload-container btn btn-bwm">
+        <input class="d-none" #imageInput
+               type="file"
+               accept="image/*"
+               (change)="processFile(imageInput, announcement.image)">
+        <img *ngIf="updated" class="img-fluid rounded" src="{{announcement.image.src}}">
+        <img *ngIf="!updated" class="img-fluid rounded" src="data:image/jpeg;base64,{{announcement.image.src}}">
+      </label>
+      <div *ngIf="isInvalid" class="w-100 alert border-danger my-4 text-center">
+        ALERT
+      </div>
+      <button (click)="send()" class="btn form-control btn-dark blue">SUBMIT</button>
+    </div>
+
+  </div>
+</div>

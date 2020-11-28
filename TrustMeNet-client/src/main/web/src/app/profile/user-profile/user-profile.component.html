@@ -1,0 +1,56 @@
+<div *ngIf="user" class="row">
+  <div class="container">
+    <div class="row justify-content-md-left">
+      <div class="col-md-auto">
+
+        <div  class="img-preview-container"
+              [ngStyle]="{ 'background-image': 'url(data:image/jpeg;base64,' + user.image.src  + ')'}">
+        </div>
+
+        <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
+          Edit
+        </button>
+        <button *ngIf="!isOwn && !isFriend" class="btn blue btn-block" (click)="friendship()">
+          Add to friends
+        </button>
+        <button *ngIf="!isOwn && isFriend" class="btn blue btn-block" (click)="friendship()">
+          Delete from friends
+        </button>
+
+      </div>
+      <div class="col-lg-8">
+        <div class="col-lg-12 col-md-3 mx-auto">
+          <table class="table table-hover h5">
+            <tbody>
+            <tr class="table-borderless">
+              <td style="text-align: left">Login</td>
+              <td style="text-align: left">{{user.login}}</td>
+
+            </tr>
+
+            <tr>
+              <td style="text-align: left">First Name</td>
+              <td style="text-align: left">{{user.firstName}}</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Second Name</td>
+              <td style="text-align: left">{{user.secondName}}</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Profile</td>
+              <td style="text-align: left">{{user.profile}}</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Rating</td>
+              <td style="text-align: left"> {{user.rating}}
+                <img src="../../../assets/images/ratings-icon.jpg" width="30" height="30" align="bottom"/></td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

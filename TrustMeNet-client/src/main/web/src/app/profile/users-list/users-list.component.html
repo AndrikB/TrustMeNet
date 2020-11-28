@@ -1,0 +1,7 @@
+<ng-container *ngFor="let user of users">
+  <tr routerLink="/users/{{user.id}}">
+    <td><img src="data:image/jpeg;base64,{{user.image.src}}" height="50" class="avatar" alt="Avatar"></td>
+    <td><a routerLink="/user/{{user.id}}"> {{user.login}}</a></td>
+    <td>{{user.firstName}} {{user.secondName}}</td>
+  </tr>
+</ng-container>
