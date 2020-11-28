@@ -1,5 +1,0 @@
-<div *ngIf="message" class="custom text-center"
-     [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
-  {{message.text}}
-  <span (click)="clear()" class="btn float-right" style="margin-top: -0.4rem">X</span>
-</div>
