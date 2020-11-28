@@ -25,19 +25,19 @@ export class AnnouncementService {
   putImage(image: File) {
     const uploadData = new FormData();
     uploadData.append('myFile', image, "name");
-    return this.http.put(`${api}/image`, uploadData);
+    return this.http.put(`${api}image`, uploadData);
   }
 
   updateAnnouncement(announcement: Announcement) {
-    return this.http.put<string>(`${api}/announcement/`, announcement, this.httpOptions);
+    return this.http.put<string>(`${api}announcement/`, announcement, this.httpOptions);
   }
 
   sendAnnouncement(announcement: Announcement) {
-    return this.http.post<string>(`${api}/announcement/`, announcement, this.httpOptions);
+    return this.http.post<string>(`${api}announcement/`, announcement, this.httpOptions);
   }
 
   getById(id: string) {
-    return this.http.get<Announcement>(`${api}/announcement/${id}`).pipe(
+    return this.http.get<Announcement>(`${api}announcement/${id}`).pipe(
       catchError(this.handleError<Announcement>())
     );
   }
@@ -50,11 +50,11 @@ export class AnnouncementService {
   }
 
   deleteAnnouncement(announcement: Announcement) {
-    return this.http.delete(`${api}/announcement/${announcement.id}`);
+    return this.http.delete(`${api}announcement/${announcement.id}`);
   }
 
   getAll(isPublished:boolean){
-    return this.http.get<Announcement[]>(`${api}/announcements?isPublished=${isPublished}`).pipe(
+    return this.http.get<Announcement[]>(`${api}announcements?isPublished=${isPublished}`).pipe(
       catchError(this.handleError<Announcement[]>())
     );
   }
