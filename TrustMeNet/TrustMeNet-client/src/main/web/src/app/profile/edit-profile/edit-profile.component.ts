@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../../core/models/User";
 import {UserService} from "../../core/services/user.service";
 import {SecurityService} from "../../core/services/security.service";
 import {Router} from "@angular/router";
+import {AlertService} from "../../core/services/alert.service";
 
 
 @Component({
@@ -12,14 +13,16 @@ import {Router} from "@angular/router";
 })
 export class EditProfileComponent implements OnInit {
 
-  constructor(private userService: UserService,
-              private securityService: SecurityService,
-              private router: Router) { }
-
   id: number;
   user: User;
   passwordNew: string = '';
   firstSelected: boolean = true;
+
+  constructor(private userService: UserService,
+              private securityService: SecurityService,
+              private alert: AlertService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.id = this.securityService.getCurrentId();
@@ -27,13 +30,13 @@ export class EditProfileComponent implements OnInit {
   }
 
 
-  edit(id: number, firstname: string, secondname: string, email: string, profile: string) {
+  edit(id: number, firstname: string, secondname: string, profile: string) {
     let editedUser: User = {
       id: id,
       firstName: firstname,
       secondName: secondname,
       login: this.user.login,
-      mail: email,
+      mail: this.user.mail,
       password: this.user.password,
       profile: profile,
       rating: this.user.rating,
@@ -62,8 +65,7 @@ export class EditProfileComponent implements OnInit {
       console.log("check " + data);
       if (data) {
         this.changePassword(newPassword);
-      }
-      else {
+      } else {
       }
     });
   }
@@ -72,5 +74,28 @@ export class EditProfileComponent implements OnInit {
     this.userService.changePassword(this.user.login, newPassword).subscribe(data => {
       this.router.navigate(['profile']).then()
     });
+  }
+
+  uploadFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    if (file.size / 1024 / 1024 > 1) {
+      this.alert.error("The image is too big");
+      return;
+    }
+    reader.addEventListener('load', (event: any) => {
+      this.userService.changeImage(file).subscribe(
+        id => {
+          this.user.imageId = <number>id;
+          this.user.image.src = event.target.result.split('base64,')[1];
+          console.log(event.target.result);
+        },
+        error => {
+          console.log(error);
+          this.alert.error("Cant change image");
+        });
+    });
+    reader.readAsDataURL(file);
   }
 }

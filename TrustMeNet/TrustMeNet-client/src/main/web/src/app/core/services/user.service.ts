@@ -58,4 +58,10 @@ export class UserService {
         catchError(this.handleError<User[]>([]))
       );
   }
+
+  changeImage(file: File) {
+    const uploadData = new FormData();
+    uploadData.append('myFile', file, file.name);
+    return this.http.put(`${api}image`, uploadData);
+  }
 }

@@ -29,7 +29,7 @@ public class UserService {
         currentUser.setFirstName(editedUser.getFirstName());
         currentUser.setSecondName(editedUser.getSecondName());
         currentUser.setProfile(editedUser.getProfile());
-        currentUser.setMail(editedUser.getMail());
+        currentUser.setImageId(editedUser.getImageId());
 
         userDao.update(currentUser);
     }

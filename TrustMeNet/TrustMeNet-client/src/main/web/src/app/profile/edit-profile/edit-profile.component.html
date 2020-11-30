@@ -15,6 +15,22 @@
 
     <div class="container" *ngIf="user">
       <h3 class="col-sm-10 text-center offset-md-1 mt-4">Edit Personal Data</h3>
+      <div class="row">
+        <div class="col"></div>
+        <div>
+          <label class="text-center" style="width: 100%">
+            <span class="btn">change photo</span>
+            <input class="d-none"  style="width: 100%" #imageInput
+                   type="file" accept="image/*"
+                   (change)="uploadFile(imageInput)"/>
+          </label>
+          <div class="img-preview-container col text-center"
+               [ngStyle]="{ 'background-image': 'url(data:image/jpeg;base64,' + user.image.src  + ')'}">
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+
       <div class="form-horizontal align-content-center">
         <div class="form-group required"><label
           class="col-md-2 control-label offset-md-1">First Name</label>
@@ -40,17 +56,17 @@
             </small>
           </div>
         </div>
-        <div class="form-group required"><label class="col-md-2 control-label offset-md-1">E-mail</label>
-          <div class="col-sm-10 offset-md-1">
-            <input type="email" placeholder="Email" class="form-control" [(ngModel)]="user.mail"
-                   #email="ngModel"
-                   pattern="^[A-z\d._]+@[A-z]+\.[A-z]+$" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-danger"
-                   [hidden]="email.valid && user.mail.length>1 || email.untouched">
-              No Valid Mail
-            </small>
-          </div>
-        </div>
+<!--        <div class="form-group required"><label class="col-md-2 control-label offset-md-1">E-mail</label>-->
+<!--          <div class="col-sm-10 offset-md-1">-->
+<!--            <input type="email" placeholder="Email" class="form-control" [(ngModel)]="user.mail"-->
+<!--                   #email="ngModel"-->
+<!--                   pattern="^[A-z\d._]+@[A-z]+\.[A-z]+$" aria-describedby="emailHelp">-->
+<!--            <small id="emailHelp" class="form-text text-danger"-->
+<!--                   [hidden]="email.valid && user.mail.length>1 || email.untouched">-->
+<!--              No Valid Mail-->
+<!--            </small>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="form-group"><label class="col-md-2 control-label offset-md-1">Description</label>
           <div class="col-sm-10 offset-md-1">
             <input type="text" placeholder="Description" class="form-control" [(ngModel)]="user.profile"
@@ -65,9 +81,9 @@
         <div class="row">
           <div class="form-check col-sm-5 offset-md-1">
             <button
-              [disabled]="!firstname.valid || !lastname.valid ||  !email.valid || user.secondName.length<2 ||
-               user.firstName.length<2 || user.mail.length<2 || !profile.valid || user.profile.length>100"
-              (click)="edit(id,firstname.value, lastname.value, email.value, profile.value)"
+              [disabled]="!firstname.valid || !lastname.valid || user.secondName.length<2 ||
+               user.firstName.length<2 || !profile.valid || user.profile.length>100"
+              (click)="edit(id,firstname.value, lastname.value, profile.value)"
 
               class="btn btn-block col-sm-12 blue">
               save
