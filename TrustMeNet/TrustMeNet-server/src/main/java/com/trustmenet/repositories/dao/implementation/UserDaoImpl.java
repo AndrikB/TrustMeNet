@@ -59,11 +59,7 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
         } else {
             preparedStatement.setNull(8, Types.VARCHAR);
         }
-        if (userDto.getRating() != 0) {
-            preparedStatement.setInt(9, userDto.getRating());
-        } else {
-            preparedStatement.setNull(9, Types.INTEGER);
-        }
+        preparedStatement.setInt(9, userDto.getRating());
         preparedStatement.setInt(10, userDto.getImageId());
         return preparedStatement;
     }
@@ -207,8 +203,9 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
     }
 
     @Override
-    public void updateUserScore(int userId, int score) {
-        jdbcTemplate.update(usersQueries.get("updateUserScore"), score, userId);
+    public void increaseUserRating(int userId, int scorePlus) {
+        log.info("update");
+        jdbcTemplate.update(usersQueries.get("increaseRating"), scorePlus, userId);
     }
 
     @Override

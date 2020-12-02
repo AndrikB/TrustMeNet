@@ -59,4 +59,8 @@ public class UserService {
     public boolean checkUsersFriendship(int id, int friendId) {
         return userDao.checkUsersFriendship(id, friendId);
     }
+
+    public void increaseUserRating(int userId, int ratingPlus){
+        userDao.increaseUserRating(userId, ratingPlus);
+    }
 }

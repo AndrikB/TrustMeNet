@@ -21,6 +21,7 @@ public class AnnouncementExtractor implements ResultSetExtractor<List<Announceme
             Announcement announcement = Announcement.builder()
                     .id(resultSet.getInt("id"))
                     .authorLogin(resultSet.getString("author_login"))
+                    .authorId(resultSet.getInt("author_id"))
                     .isPublished(resultSet.getBoolean("is_published"))
                     .title(resultSet.getString("title"))
                     .subtitle(resultSet.getString("subtitle"))

@@ -35,7 +35,7 @@ public interface UserDao extends GenericDao<UserDto> {
 
     void updateUserStatus(int id, UserAccountStatus status);
 
-    void updateUserScore(int userId, int score);
+    void increaseUserRating(int userId, int scorePlus);
 
     void changePassword(String password, String login);
 }
