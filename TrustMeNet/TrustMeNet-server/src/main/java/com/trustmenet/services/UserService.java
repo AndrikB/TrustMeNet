@@ -46,4 +46,17 @@ public class UserService {
     public List<UserDto> getNextPageOfUsers(int usersCount) {
         return userDao.getUsersPage(10, usersCount);
     }
+
+    public boolean addUserFriend(int userId, int friendId) {
+        return userDao.addUserFriend(userId, friendId);
+    }
+
+    public boolean deleteUserFriend(int userId, int friendId) {
+        userDao.deleteUserFriend(userId, friendId);
+        return true;
+    }
+
+    public boolean checkUsersFriendship(int id, int friendId) {
+        return userDao.checkUsersFriendship(id, friendId);
+    }
 }

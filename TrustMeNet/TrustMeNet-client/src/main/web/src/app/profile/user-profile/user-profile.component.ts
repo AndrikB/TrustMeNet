@@ -11,28 +11,41 @@ import {SecurityService} from "../../core/services/security.service";
 })
 export class UserProfileComponent implements OnInit {
 
+  isOwn = false;
+  isFriend = false;
+  id: number;
+  user: User;
+
   constructor(private route: ActivatedRoute,
               private userService: UserService,
               private securityService: SecurityService,
               private router: Router) {
   }
 
-  isOwn = false;
-  isFriend = false;
-
-  user: User;
-
   ngOnInit(): void {
-    let id = Number(this.route.snapshot.paramMap.get('id'));
-    if(!this.route.snapshot.paramMap.get('id')){
-      id = this.securityService.getCurrentId();
-      this.isOwn = true;
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    if (!this.route.snapshot.paramMap.get('id')) {
+      this.id = this.securityService.getCurrentId();
     }
-    this.userService.getUser(id).subscribe(data => this.user = data,
-        error => this.router.navigate(['profile']))
+    this.isOwn = (this.id == this.securityService.getCurrentId());
+    if (this.id == Number(this.route.snapshot.paramMap.get('id'))) {
+      this.userService.checkFriendship(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+        console.log(data)
+        this.isFriend = data;
+      });
+    }
+    this.userService.getUser(this.id).subscribe(data => this.user = data,
+      error => this.router.navigate(['profile']))
   }
 
   friendship() {
-
+    if (this.isFriend)
+      this.userService.removeFriend(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+        this.isFriend = false;
+      });
+    else
+      this.userService.addFriend(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+        this.isFriend = true
+      });
   }
 }

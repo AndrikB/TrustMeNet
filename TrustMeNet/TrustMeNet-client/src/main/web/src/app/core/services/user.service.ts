@@ -64,4 +64,19 @@ export class UserService {
     uploadData.append('myFile', file, file.name);
     return this.http.put(`${api}image`, uploadData);
   }
+
+  addFriend(currentId: number, friendId: number) {
+    return this.http.post<string>(`${api}users/${currentId}/addFriend`, friendId, this.httpOptions);
+  }
+
+  removeFriend(currentId: number, friendId: number) {
+    return this.http.post<string>(`${api}users/${currentId}/removeFriend`, friendId, this.httpOptions);
+  }
+
+  checkFriendship(currentId: number, friendId: number) {
+    return this.http.get<boolean>(`${api}users/${currentId}/checkFriend/${friendId}`)
+      .pipe(
+        catchError(this.handleError<boolean>(false))
+      );
+  }
 }

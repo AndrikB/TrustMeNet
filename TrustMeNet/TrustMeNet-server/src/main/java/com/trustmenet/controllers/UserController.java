@@ -4,6 +4,7 @@ package com.trustmenet.controllers;
 import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,5 +42,22 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDto> getUsers(@RequestParam(value = "usersCount") int usersCount) {
         return userService.getNextPageOfUsers(usersCount);
+    }
+
+    @PostMapping("/users/{id}/addFriend")
+    public boolean addFriend(@PathVariable int id,
+                             @RequestBody int friendId) {
+        return userService.addUserFriend(id, friendId);
+    }
+
+    @PostMapping("/users/{id}/removeFriend")
+    public boolean removeFriend(@PathVariable int id,
+                                @RequestBody int friendId) {
+        return userService.deleteUserFriend(id, friendId);
+    }
+
+    @GetMapping("/users/{id}/checkFriend/{friendId}")
+    public boolean checkFriend(@PathVariable int id, @PathVariable int friendId) {
+        return userService.checkUsersFriendship(id, friendId);
     }
 }
