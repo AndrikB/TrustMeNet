@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private securityService: SecurityService,
+              public securityService: SecurityService,
               private router: Router) {
   }
 
@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
     }
     this.isOwn = (this.id == this.securityService.getCurrentId());
     if (this.id == Number(this.route.snapshot.paramMap.get('id'))) {
-      this.userService.checkFriendship(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+      this.userService.checkFriendship(this.securityService.getCurrentId(), this.id).subscribe(data => {
         console.log(data)
         this.isFriend = data;
       });
@@ -40,11 +40,11 @@ export class UserProfileComponent implements OnInit {
 
   friendship() {
     if (this.isFriend)
-      this.userService.removeFriend(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+      this.userService.removeFriend(this.securityService.getCurrentId(), this.id).subscribe(data => {
         this.isFriend = false;
       });
     else
-      this.userService.addFriend(Number(this.route.snapshot.paramMap.get('id')), this.id).subscribe(data => {
+      this.userService.addFriend(this.securityService.getCurrentId(), this.id).subscribe(data => {
         this.isFriend = true
       });
   }

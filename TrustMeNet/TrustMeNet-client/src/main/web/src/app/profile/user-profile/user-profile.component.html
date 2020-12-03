@@ -7,15 +7,17 @@
               [ngStyle]="{ 'background-image': 'url(data:image/jpeg;base64,' + user.image.src  + ')'}">
         </div>
 
-        <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
-          Edit
-        </button>
-        <button *ngIf="!isOwn && !isFriend" class="btn blue btn-block" (click)="friendship()">
-          Add to friends
-        </button>
-        <button *ngIf="!isOwn && isFriend" class="btn blue btn-block" (click)="friendship()">
-          Delete from friends
-        </button>
+        <ng-container *ngIf="securityService.isAuthenticated()">
+          <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
+            Edit
+          </button>
+          <button *ngIf="!isOwn && !isFriend" class="btn blue btn-block" (click)="friendship()">
+            Add to friends
+          </button>
+          <button *ngIf="!isOwn && isFriend" class="btn blue btn-block" (click)="friendship()">
+            Delete from friends
+          </button>
+        </ng-container>
 
       </div>
       <div class="col-lg-8">

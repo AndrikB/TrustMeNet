@@ -19,9 +19,11 @@ import java.util.List;
 @Service
 @PropertySource("classpath:application.properties")
 public class ImageService {
+
     @Autowired
     private ImageDaoImpl imageDao;
 
+    private final List<String> validContentTypes = List.of("image/png", "image/jpeg", "image/gif");
 
     public int addImage(MultipartFile multipartFile) {
         String encodedFile;
@@ -29,16 +31,18 @@ public class ImageService {
         if (multipartFile == null) {
             log.error("addImage: multipartFile is null");
             return -1;
-        } else {
-            byte[] fileBytes;
-            try {
-                fileBytes = multipartFile.getBytes();
-            } catch (IOException e) {
-                log.error("Error while get bytes of file", e);
-                return -1;
-            }
-            encodedFile = Base64.getEncoder().encodeToString(fileBytes);
         }
+        if (!validContentTypes.contains(multipartFile.getContentType())) {
+            throw new UnsupportedOperationException("File has incorrect content type " + multipartFile.getContentType());
+        }
+        byte[] fileBytes;
+        try {
+            fileBytes = multipartFile.getBytes();
+        } catch (IOException e) {
+            log.error("Error while get bytes of file", e);
+            return -1;
+        }
+        encodedFile = Base64.getEncoder().encodeToString(fileBytes);
 
         return saveImage(encodedFile);
     }

@@ -2,8 +2,8 @@ package com.trustmenet.services;
 
 import com.trustmenet.config.JWTUtils;
 import com.trustmenet.repositories.dao.UserDao;
-import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.repositories.entities.Token;
+import com.trustmenet.repositories.entities.UserDto;
 import com.trustmenet.repositories.entities.enums.Role;
 import com.trustmenet.repositories.entities.enums.TokenType;
 import com.trustmenet.repositories.entities.enums.UserAccountStatus;
@@ -45,7 +45,7 @@ public class RegistrationService {
     private TokenService tokenService;
 
     @Transactional
-    public void registerUser(UserDto user){
+    public void registerUser(UserDto user) {
         if (userDao.getUserByLogin(user.getLogin()) != null || userDao.getUserByMail(user.getMail()) != null) {
             return;
         }
@@ -67,7 +67,7 @@ public class RegistrationService {
                 .userId(id)
                 .build();
         tokenService.saveToken(tokenForNewUser);
-        mailService.sendRegistrationMessage(user.getMail(), user.getLogin(), "https://trustmenet.herokuapp.com/#/registration/"+tokenForNewUser.getToken());
+        mailService.sendRegistrationMessage(user.getMail(), user.getLogin(), "https://trust-me-net.herokuapp.com/#/registration/" + tokenForNewUser.getToken());
     }
 
     @Transactional
@@ -87,10 +87,11 @@ public class RegistrationService {
         return true;
     }
 
-    public String login(String login, String password){
+    public String login(String login, String password) {
         UserDto user = userDao.getUserByLogin(login);
 
-        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())
+                || user.getStatus().equals(UserAccountStatus.UNACTIVATED)) {
             throw new BadCredentialsException("Invalid username or password");
         }
 
@@ -111,7 +112,7 @@ public class RegistrationService {
                 .build();
 
         tokenService.saveToken(token);
-        mailService.sendRecoveryPasswordMessage(user.getMail(), user.getLogin(), "https://trustmenet.herokuapp.com/#/recovery/" + token.getToken());
+        mailService.sendRecoveryPasswordMessage(user.getMail(), user.getLogin(), "https://trust-me-net.herokuapp.com/#/recovery/" + token.getToken());
         return true;
     }
 

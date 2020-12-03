@@ -58,7 +58,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/",
                         "/api/v1/registration/**",
                         "/api/v1/login/**",
-                        "/api/v1/pass-recovery/**")
+                        "/api/v1/pass-recovery/**",
+                        "/api/v1/announcements",
+                        "/api/v1/announcement/*",
+                        "/api/v1/users",
+                        "/api/v1/users/*")
                 .permitAll()
                 .antMatchers("/favicon.ico",
                         "/**/*.css",
