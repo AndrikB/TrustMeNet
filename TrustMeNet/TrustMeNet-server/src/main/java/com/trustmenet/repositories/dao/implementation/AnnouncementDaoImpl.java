@@ -61,7 +61,7 @@ public class AnnouncementDaoImpl extends GenericDaoImpl<Announcement> implements
     @Override
     public Announcement getById(int id) {
         List<Announcement> result = jdbcTemplate.query(
-                announcementQueries.get("getAllInfo").replace(";", " WHERE a.id = ?;"),
+                announcementQueries.get("getAllInfo").replace("ORDER BY a.created_date DESC;", " WHERE a.id = ?;"),
                 new Object[]{id}, new AnnouncementExtractor()
         );
         return result.size() == 0 ? null : result.get(0);
@@ -71,7 +71,7 @@ public class AnnouncementDaoImpl extends GenericDaoImpl<Announcement> implements
     @Override
     public List<Announcement> getAllInfo(boolean isPublished) {
         return jdbcTemplate.query(
-                announcementQueries.get("getAllInfo").replace(";", " WHERE is_published = ?;"),
+                announcementQueries.get("getAllInfo").replace("ORDER BY a.created_date DESC;", " WHERE is_published = ? ORDER BY a.created_date DESC;"),
                 new Object[]{isPublished},
                 new AnnouncementMapper());
     }
