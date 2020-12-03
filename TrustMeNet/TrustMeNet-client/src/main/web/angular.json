@@ -36,7 +36,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "jquery"
+              "jquery",
+              "sockjs-client"
             ],
             "outputPath": "dist/np-app",
             "index": "src/index.html",

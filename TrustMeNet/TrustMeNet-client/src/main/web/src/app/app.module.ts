@@ -18,6 +18,9 @@ import {AnnouncementModule} from "./announcement/announcement.module";
 import {AnnouncementRoutingModule} from "./announcement/announcement-routing.module";
 import {FormsModule} from "@angular/forms";
 
+import {ChatModule} from "./chat/chat.module";
+import {ChatRoutingModule} from "./chat/chat-routing.module";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -31,6 +34,8 @@ import {FormsModule} from "@angular/forms";
     AnnouncementModule,
     AnnouncementRoutingModule,
     CoreModule,
+    ChatModule,
+    ChatRoutingModule,
     ProfileModule,
     ProfileRoutingModule,
   ],

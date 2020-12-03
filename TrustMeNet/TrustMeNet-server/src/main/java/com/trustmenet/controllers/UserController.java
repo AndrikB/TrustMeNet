@@ -60,4 +60,11 @@ public class UserController {
     public boolean checkFriend(@PathVariable int id, @PathVariable int friendId) {
         return userService.checkUsersFriendship(id, friendId);
     }
+
+    @GetMapping("/users/{id}/friends")
+    public List<UserDto> getFriends(@PathVariable int id) {
+        List<UserDto> u = userService.getUserFriends(id);
+        System.out.println("sss");
+        return u;
+    }
 }

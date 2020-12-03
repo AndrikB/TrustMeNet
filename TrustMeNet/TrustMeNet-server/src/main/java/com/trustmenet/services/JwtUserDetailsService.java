@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-
     @Autowired
     private UserDao userDao;
 

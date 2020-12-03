@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserDao userDao;
 
@@ -62,5 +61,9 @@ public class UserService {
 
     public void increaseUserRating(int userId, int ratingPlus){
         userDao.increaseUserRating(userId, ratingPlus);
+    }
+
+    public List<UserDto> getUserFriends(int userId) {
+        return userDao.getUserFriends(userId);
     }
 }

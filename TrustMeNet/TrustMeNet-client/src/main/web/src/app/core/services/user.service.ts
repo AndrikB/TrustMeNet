@@ -30,6 +30,13 @@ export class UserService {
     return this.http.get<User>(`${api}users/${id}`, this.httpOptions)
   }
 
+  getFriends(id: number) {
+    return this.http.get<User[]>(`${api}users/${id}/friends`)
+      .pipe(
+        catchError(this.handleError<User[]>([]))
+      );
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
