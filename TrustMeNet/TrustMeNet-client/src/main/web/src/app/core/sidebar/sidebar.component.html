@@ -13,6 +13,9 @@
       <li>
         <a routerLink="/users">Users</a>
       </li>
+      <li *ngIf="securityService.isAuthenticated()">
+        <a routerLink="/friends">Friends</a>
+      </li>
       <li>
         <a href="#/announcements">Announcements</a>
       </li>
