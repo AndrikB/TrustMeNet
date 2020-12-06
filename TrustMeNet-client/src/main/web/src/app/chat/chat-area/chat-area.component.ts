@@ -11,7 +11,7 @@ import {socket} from "../../../environments/environment.prod";
 import {EventType, WebsocketEvent} from "../../core/models/websocketEvent";
 import {UserService} from "../../core/services/user.service";
 
-import {User} from "../../core/models/user";
+import {User} from "../../core/models/User";
 
 @Component({
   selector: 'app-chat-area',

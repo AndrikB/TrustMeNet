@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Chat} from "../../core/models/chat";
 import {SecurityService} from "../../core/services/security.service";
 import {ChatService} from "../../core/services/chat.service";
-import {User} from "../../core/models/user";
+import {User} from "../../core/models/User";
 
 @Component({
   selector: 'app-chat-list',
