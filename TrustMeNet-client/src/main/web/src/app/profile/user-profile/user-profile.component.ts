@@ -48,4 +48,17 @@ export class UserProfileComponent implements OnInit {
         this.isFriend = true
       });
   }
+
+  changeStatus() {
+    if (this.user.role=='USER'){
+      this.userService.appointToModer(this.id).subscribe(data =>
+        this.user.role = 'MODERATOR'
+      );
+    }
+    else {
+      this.userService.cancelAppointingToModer(this.id).subscribe(data =>
+        this.user.role = 'USER'
+      );
+    }
+  }
 }

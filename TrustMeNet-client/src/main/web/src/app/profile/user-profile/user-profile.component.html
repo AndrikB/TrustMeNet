@@ -11,12 +11,25 @@
           <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
             Edit
           </button>
-          <button *ngIf="!isOwn && !isFriend" class="btn blue btn-block" (click)="friendship()">
-            Add to friends
-          </button>
-          <button *ngIf="!isOwn && isFriend" class="btn blue btn-block" (click)="friendship()">
-            Delete from friends
-          </button>
+          <ng-container *ngIf="!isOwn">
+            <button *ngIf="!isFriend" class="btn blue btn-block" (click)="friendship()">
+              Add to friends
+            </button>
+            <button *ngIf="isFriend" class="btn blue btn-block" (click)="friendship()">
+              Delete from friends
+            </button>
+            <ng-container *ngIf="securityService.getCurrentRole()=='SUPER_ADMIN'">
+              <button *ngIf="user.role=='USER'" class="btn blue btn-block" (click)="changeStatus()">
+                Appoint a moderator
+              </button>
+              <button *ngIf="user.role!='USER'" class="btn blue btn-block" (click)="changeStatus()">
+                Cancel appointing to moderator
+              </button>
+            </ng-container>
+
+
+          </ng-container>
+
         </ng-container>
 
       </div>

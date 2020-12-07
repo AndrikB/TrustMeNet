@@ -43,7 +43,8 @@ export class EditProfileComponent implements OnInit {
       registrationDate: this.user.registrationDate,
       imageId: this.user.imageId,
       image: this.user.image,
-      status: this.user.status
+      status: this.user.status,
+      role: this.user.role
     };
 
     this.userService.updateUser(editedUser).subscribe(data => {

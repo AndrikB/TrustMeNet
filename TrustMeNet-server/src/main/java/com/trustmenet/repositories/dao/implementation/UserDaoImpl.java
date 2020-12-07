@@ -215,6 +215,18 @@ public class UserDaoImpl extends GenericDaoImpl<UserDto> implements UserDao {
     }
 
     @Override
+    public boolean appointToModer(int userId) {
+        jdbcTemplate.update(usersQueries.get("appointToModer"), userId);
+        return true;
+    }
+
+    @Override
+    public boolean cancelAppointingToModer(int userId) {
+        jdbcTemplate.update(usersQueries.get("cancelAppointingToModer"), userId);
+        return true;
+    }
+
+    @Override
     public void updateUserPhoto(int imageId, int userId) {
         jdbcTemplate.update(usersQueries.get("updateUserPhoto"), imageId, userId);
     }

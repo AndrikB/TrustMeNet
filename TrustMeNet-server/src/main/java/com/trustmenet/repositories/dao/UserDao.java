@@ -38,4 +38,9 @@ public interface UserDao extends GenericDao<UserDto> {
     void increaseUserRating(int userId, int scorePlus);
 
     void changePassword(String password, String login);
+
+    boolean appointToModer(int userId);
+
+    boolean cancelAppointingToModer(int userId);
+
 }

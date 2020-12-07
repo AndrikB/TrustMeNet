@@ -67,4 +67,14 @@ public class UserController {
         System.out.println("sss");
         return u;
     }
+
+    @PostMapping("/users/appointToModer")
+    public boolean appointToModer(@RequestBody int userId) {
+        return userService.appointToModer(userId);
+    }
+
+    @PostMapping("/users/cancelAppointingToModer")
+    public boolean cancelAppointingToModer(@RequestBody int userId) {
+        return userService.cancelAppointingToModer(userId);
+    }
 }

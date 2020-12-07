@@ -86,4 +86,12 @@ export class UserService {
         catchError(this.handleError<boolean>(false))
       );
   }
+
+  appointToModer(id: number) {
+    return this.http.post<string>(`${api}users/appointToModer`, id, this.httpOptions);
+  }
+
+  cancelAppointingToModer(id: number) {
+    return this.http.post<string>(`${api}users/cancelAppointingToModer`, id, this.httpOptions);
+  }
 }

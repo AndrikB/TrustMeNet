@@ -66,4 +66,12 @@ public class UserService {
     public List<UserDto> getUserFriends(int userId) {
         return userDao.getUserFriends(userId);
     }
+
+    public boolean appointToModer(int userId) {
+        return userDao.appointToModer(userId);
+    }
+
+    public boolean cancelAppointingToModer(int userId) {
+        return userDao.cancelAppointingToModer(userId);
+    }
 }

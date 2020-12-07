@@ -13,4 +13,5 @@ export class User {
   imageId:  number;
   image: Image;
   status: string;
+  role: string;
 }
