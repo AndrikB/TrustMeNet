@@ -22,6 +22,9 @@
       <li *ngIf="securityService.isAuthenticated()">
         <a routerLink="/chats">Chat</a>
       </li>
+      <li *ngIf="securityService.getCurrentRole()=='SUPER_ADMIN'">
+        <a routerLink="/create-achievements">Create Achievements</a>
+      </li>
     </ul>
 
   </nav>

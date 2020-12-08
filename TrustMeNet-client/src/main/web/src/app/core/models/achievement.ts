@@ -2,7 +2,7 @@ export class Achievement {
   id: number;
   name: String;
   description: String;
-  conditions: AchievementCondition[];
+  achievementConditions: AchievementCondition[];
 
 }
 

@@ -8,9 +8,16 @@
         </div>
 
         <ng-container *ngIf="securityService.isAuthenticated()">
-          <button *ngIf="isOwn" class="btn blue btn-block" routerLink="/edit">
-            Edit
-          </button>
+          <ng-container *ngIf="isOwn">
+            <button class="btn blue btn-block" routerLink="/edit">
+              Edit
+            </button>
+            <button *ngIf="securityService.getCurrentRole()=='SUPER_ADMIN'"
+                    class="btn blue btn-block" (click)="recalculate()">
+              Recalculate Achievements
+            </button>
+          </ng-container>
+
           <ng-container *ngIf="!isOwn">
             <button *ngIf="!isFriend" class="btn blue btn-block" (click)="friendship()">
               Add to friends
@@ -67,5 +74,5 @@
       </div>
     </div>
   </div>
-  <app-achievements [userId]="user.id"></app-achievements>
 </div>
+<app-achievements [userId]="user.id"></app-achievements>

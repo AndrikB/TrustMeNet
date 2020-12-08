@@ -20,6 +20,7 @@ import {FormsModule} from "@angular/forms";
 
 import {ChatModule} from "./chat/chat.module";
 import {ChatRoutingModule} from "./chat/chat-routing.module";
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {ChatRoutingModule} from "./chat/chat-routing.module";
     ChatRoutingModule,
     ProfileModule,
     ProfileRoutingModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},
     AuthGuardService, RoleGuardService, {provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],

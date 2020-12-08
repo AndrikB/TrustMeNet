@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../core/models/User";
 import {UserService} from "../../core/services/user.service";
 import {SecurityService} from "../../core/services/security.service";
+import {AchievementService} from "../../core/services/achievement.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -19,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private userService: UserService,
               public securityService: SecurityService,
+              private achievementService: AchievementService,
               private router: Router) {
   }
 
@@ -60,5 +62,9 @@ export class UserProfileComponent implements OnInit {
         this.user.role = 'USER'
       );
     }
+  }
+
+  recalculate() {
+    this.achievementService.recalculateAchievements().subscribe();
   }
 }

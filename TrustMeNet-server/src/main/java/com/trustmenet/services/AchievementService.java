@@ -9,10 +9,12 @@ import com.trustmenet.repositories.dao.implementation.UserAchievementsDaoImpl;
 import com.trustmenet.repositories.entities.Achievement;
 import com.trustmenet.repositories.entities.AchievementCharacteristic;
 import com.trustmenet.repositories.entities.AchievementCondition;
+import com.trustmenet.repositories.entities.UserAchievement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AchievementService {
@@ -55,6 +57,29 @@ public class AchievementService {
     }
 
     public void recalculateAchievements() {
-        //TODO
+        List<Achievement> achievements = achievementDao.getAll();
+        List<UserAchievement> beforeUpdateAchievements = userAchievementsDao.getAll();
+        List<UserAchievement> afterUpdateAchievements = achievementDao.getNewUserAchievements(achievements);
+
+        if (afterUpdateAchievements.equals(beforeUpdateAchievements)) {
+            return;
+        }
+
+        List<UserAchievement> toInsert = afterUpdateAchievements.stream()
+                .filter(userAchievement -> !beforeUpdateAchievements.contains(userAchievement))
+                .collect(Collectors.toList());
+        List<Integer> toDelete = beforeUpdateAchievements.stream()
+                .filter(userAchievement -> !afterUpdateAchievements.contains(userAchievement))
+                .map(UserAchievement::getAchievementId)
+                .collect(Collectors.toList());
+
+
+        if (!toDelete.isEmpty()) {
+            userAchievementsDao.delete(toDelete);
+        }
+        if (!toInsert.isEmpty()) {
+            userAchievementsDao.insert(toInsert);
+        }
+
     }
 }
