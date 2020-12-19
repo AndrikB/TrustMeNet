@@ -1,0 +1,59 @@
+<div class="p-m-3">
+  <div class="mb-3">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Chat name" [(ngModel)]="chat.name">
+      <div class="input-group-append">
+        <button class="btn blue" type="button" (click)="updateChat()">Перейменувати чат</button>
+        <button class="btn blue" type="button" (click)="invitation = !invitation; loadFriends()">Запросити друзів</button>
+        <button class="btn blue" type="button" (click)="leaveChat()">Покинути чат</button>
+      </div>
+    </div>
+
+    <div class="input-group mt-2" *ngIf="invitation">
+      <select #mySelect (change)="onChange(mySelect.value)" class="custom-select">
+        <option selected>Виберіть друга</option>
+        <option *ngFor="let friend of friends" [value]="friend.login" >{{friend.login}}</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn blue pl-5 pr-5" type="button" (click)="inviteFriend()">Запросити друга</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="msg_history" (scroll)="scrollHandler($event)">
+
+    <ng-container *ngFor="let message of messages">
+      <div *ngIf="message.authorId == this.id; else incoming">
+        <div class="d-flex justify-content-end row m-3">
+          <div class="col-6">
+            <p class="sent_msg">
+              <a routerLink="../../users/{{message.authorId}}" class="login text-dark">{{message.author.login}}</a>
+              {{message.messageText}}
+            </p>
+            <span class="time_date"> {{message.creationDate | date:'medium'}}</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #incoming>
+        <div class="row m-3">
+          <div class="col-7">
+            <p class="received_msg">
+              <a routerLink="../../users/{{message.authorId}}" class="login text-dark">{{message.author.login}}</a>
+              {{message.messageText}}
+            </p>
+            <span class="time_date"> {{message.creationDate | date:'medium'}}</span>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <div class="input-group mt-3">
+    <input type="text" class="form-control" placeholder="Повідомлення..." [(ngModel)]="message.messageText" (keydown.enter)="sendMessage()">
+    <div class="input-group-append">
+      <button class="btn blue pl-5 pr-5" type="Send" (click)="sendMessage()">Надіслати</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,7 @@
+.img-preview-container {
+  position: relative;
+  background: no-repeat center center;
+  background-size: contain;
+  height: 250px !important;
+  width: 230px !important;
+}

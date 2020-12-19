@@ -1,0 +1,12 @@
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.img-preview-container {
+  position: relative;
+  background: no-repeat center center;
+  background-size: contain;
+  height: 250px !important;
+  width: 230px !important;
+}
